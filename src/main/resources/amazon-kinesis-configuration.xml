@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+    Copyright 2023-present HiveMQ GmbH
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<hivemq-amazon-kinesis-extension xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                                 xsi:noNamespaceSchemaLocation="amazon-kinesis-configuration.xsd">
+    <!--<aws-credential-profiles>
+            <aws-credential-profile>
+                <id>aws-credential-profile-01</id>
+                <profile-file>{PATH_TO_YOUR_CREDENTIALS_PROFILE_FILE}</profile-file>
+                <profile-name>{NAME_OF_YOUR_CREDENTIALS_PROFILE}</profile-name>
+            </aws-credential-profile>
+        </aws-credential-profiles>-->
+
+    <mqtt-to-kinesis-routes>
+        <mqtt-to-kinesis-route>
+            <id>mqtt-to-kinesis-hello-world-transformer-route</id>
+            <!--<aws-credential-profile-id>aws-credential-profile-01</aws-credential-profile-id>-->
+            <!--<region>{INSERT_YOUR_AWS_REGION_HERE}</region>-->
+            <mqtt-topic-filters>
+                <mqtt-topic-filter>to-kinesis/#</mqtt-topic-filter>
+            </mqtt-topic-filters>
+            <processor>
+                <transformer>
+                    <custom-settings>
+                        <custom-setting>
+                            <name>destination</name>
+                            <value>{INSERT_YOUR_AMAZON_KINESIS_DESTINATION_STREAM_HERE}</value>
+                        </custom-setting>
+                    </custom-settings>
+                    <implementation>
+                        com.hivemq.extensions.amazon.kinesis.customizations.helloworld.MqttToKinesisHelloWorldTransformer
+                    </implementation>
+                </transformer>
+            </processor>
+        </mqtt-to-kinesis-route>
+    </mqtt-to-kinesis-routes>
+    <kinesis-to-mqtt-routes>
+        <kinesis-to-mqtt-route>
+            <id>kinesis-to-mqtt-hello-world-transformer-route</id>
+            <!--<aws-credential-profile-id>aws-credential-profile-01</aws-credential-profile-id>-->
+            <!--<region>{INSERT_YOUR_AWS_REGION_HERE}</region>-->
+            <kinesis-streams>
+                <kinesis-stream>
+                    <name>{INSERT_YOUR_AMAZON_KINESIS_SOURCE_STREAM_HERE}</name>
+                    <consumer-application-name>{INSERT_YOUR_AMAZON_KINESIS_APPLICATION_NAME_HERE}
+                    </consumer-application-name>
+                    <consumer-retrieval-mode>
+                        <polling/>
+                    </consumer-retrieval-mode>
+                </kinesis-stream>
+            </kinesis-streams>
+            <processor>
+                <transformer>
+                    <custom-settings>
+                        <custom-setting>
+                            <name>qos</name>
+                            <value>2</value>
+                        </custom-setting>
+                    </custom-settings>
+                    <implementation>
+                        com.hivemq.extensions.amazon.kinesis.customizations.helloworld.KinesisToMqttHelloWorldTransformer
+                    </implementation>
+                </transformer>
+            </processor>
+        </kinesis-to-mqtt-route>
+    </kinesis-to-mqtt-routes>
+</hivemq-amazon-kinesis-extension>

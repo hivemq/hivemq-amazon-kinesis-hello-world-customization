@@ -1,1 +1,57 @@
+:hivemq-amazon-kinesis-docs: https://www.hivemq.com/docs/hivemq-amazon-kinesis-extension
+:hivemq-blog-tools: https://www.hivemq.com/mqtt-toolbox/
+:hivemq-support: https://community.hivemq.com
+
 = HiveMQ Amazon Kinesis Extension Hello World Customization
+
+image:https://img.shields.io/badge/Customization_Type-Demonstration-orange?style=for-the-badge[Extension Type]
+image:https://img.shields.io/github/v/release/hivemq/hivemq-amazon-kinesis-hello-world-customization?style=for-the-badge[GitHub release (latest by date),link=https://github.com/hivemq/hivemq-amazon-kinesis-hello-world-customization/releases/latest]
+image:https://img.shields.io/github/license/hivemq/hivemq-amazon-kinesis-hello-world-customization?style=for-the-badge&color=brightgreen[GitHub,link=LICENSE]
+
+== Purpose
+
+This project contains two example transformer implementations that show how to use the customization SDK for the {hivemq-amazon-kinesis-docs}[HiveMQ Enterprise Extension for Amazon Kinesis].
+
+- The `com.hivemq.extensions.amazon.kinesis.customizations.helloworld.MqttToKinesisHelloWorldTransformer` that transforms and forwards MQTT publishes to Amazon Kinesis.
+- The `com.hivemq.extensions.amazon.kinesis.customizations.helloworld.KinesisToMqttHelloWorldTransformer` that transforms and forwards Amazon Kinesis records to HiveMQ.
+
+== Installation
+
+* Clone this repository into a Java 11 Gradle project.
+* Run the `./gradlew jar` task from Gradle to build the customization.
+* Copy the `build/libs/hivemq-amazon-kinesis-hello-world-customization-4.14.0.jar` file to the  `HIVEMQ_HOME/extensions/hivemq-amazon-kinesis-extension/customizations` directory.
+* Copy the `src/main/resources/amazon-kinesis-configuration.xml` file to the `HIVEMQ_HOME/extensions/hivemq-amazon-kinesis-extension` folder.
+* Adapt the configuration to your environment.
+** (optional): Uncomment and adjust `<aws-credential-profiles>` to manage your AWS credential profiles.
+** (optional): Uncomment and adjust `<aws-credential-profile-id>` to reference your AWS credential profiles.
+** (optional): Uncomment and adjust `<region>` to choose your desired AWS Region.
+** Set the `<value>` of the destination `<custom-setting>` in the `<mqtt-to-kinesis-route>` to an existing Amazon Kinesis stream.
+** Set the `<name>` of the `<kinesis-stream>` in the `<kinesis-to-mqtt-route>` to an existing Amazon Kinesis stream.
+** Set the `<consumer-application-name>` of the `<kinesis-stream>` in the `<kinesis-to-mqtt-route>` to a unique value.
+* Delete the `HIVEMQ_HOME/extensions/hivemq-amazon-kinesis-extension/DISABLED` file (if there is one).
+* Start HiveMQ.
+
+== First Steps
+
+=== Manually Test Your mqtt-to-kinesis-route
+
+- Connect with an {hivemq-blog-tools}[MQTT client] of your choice.
+- Publish an MQTT message to the topic `to-kinesis/test`.
+- Monitor the stream you configured in your AWS account for a received message.
+
+=== Manually Test Your kinesis-to-mqtt-route
+
+- Connect with an {hivemq-blog-tools}[MQTT client] of your choice.
+- Subscribe to `from-kinesis/#`.
+- Publish an Amazon Kinesis record to the Amazon Kinesis stream.
+- Verify that you receive an MQTT message with your client.
+
+== Need Help?
+
+If you encounter any problems, we are happy to help.
+The best place to get in contact is our {hivemq-support}[community forum].
+
+== License
+
+HiveMQ Amazon Kinesis Extension Hello World Customization is licensed under the `APACHE LICENSE, VERSION 2.0`.
+A copy of the license can be found link:LICENSE[here].
