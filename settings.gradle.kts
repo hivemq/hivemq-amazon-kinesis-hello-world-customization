@@ -6,7 +6,3 @@ pluginManagement {
         id("com.github.hierynomus.license") version "${extra["plugin.license.version"]}"
     }
 }
-
-if (file("../hivemq-amazon-kinesis-extension-customization-sdk").exists()) {
-    includeBuild("../hivemq-amazon-kinesis-extension-customization-sdk")
-}
