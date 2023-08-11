@@ -1,7 +1,7 @@
 plugins {
     java
-    id("io.github.sgtsilvio.gradle.defaults")
-    id("com.github.hierynomus.license")
+    alias(libs.plugins.defaults)
+    alias(libs.plugins.license)
 }
 
 group = "com.hivemq.extensions.amazon.kinesis.customizations"
@@ -18,17 +18,14 @@ repositories {
 }
 
 dependencies {
-    implementation("com.hivemq:hivemq-amazon-kinesis-extension-customization-sdk:${property("hivemq-amazon-kinesis-sdk.version")}")
+    implementation(libs.hivemq.amazonKinesisExtension.customizationSdk)
 }
 
 dependencies {
-    testImplementation(platform("org.junit:junit-bom:${property("junit-jupiter.version")}"))
-    testImplementation(platform("org.mockito:mockito-bom:${property("mockito.version")}"))
-
-    testImplementation("org.junit.jupiter:junit-jupiter")
-    testImplementation("org.mockito:mockito-core")
-    testImplementation("org.assertj:assertj-core:${property("assertj.version")}")
-    testRuntimeOnly("org.slf4j:slf4j-simple:${property("slf4j-simple.version")}")
+    testImplementation(libs.junit.jupiter)
+    testImplementation(libs.mockito)
+    testImplementation(libs.assertj)
+    testRuntimeOnly(libs.slf4j.simple)
 }
 
 tasks.withType<Test>().configureEach {
