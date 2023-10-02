@@ -21,15 +21,18 @@ dependencies {
     implementation(libs.hivemq.amazonKinesisExtension.customizationSdk)
 }
 
-dependencies {
-    testImplementation(libs.junit.jupiter)
-    testImplementation(libs.mockito)
-    testImplementation(libs.assertj)
-    testRuntimeOnly(libs.slf4j.simple)
-}
-
-tasks.withType<Test>().configureEach {
-    useJUnitPlatform()
+@Suppress("UnstableApiUsage")
+testing {
+    suites {
+        "test"(JvmTestSuite::class) {
+            useJUnitJupiter(libs.versions.junit.jupiter)
+            dependencies {
+                implementation(libs.assertj)
+                implementation(libs.mockito)
+                runtimeOnly(libs.slf4j.simple)
+            }
+        }
+    }
 }
 
 tasks.withType<Jar>().configureEach {
