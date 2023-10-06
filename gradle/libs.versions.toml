@@ -1,6 +1,6 @@
 [versions]
 assertj = "3.24.2"
-hivemq-platform = "4.14.0"
+hivemq-platform = "4.20.0"
 junit-jupiter = "5.9.2"
 mockito = "5.2.0"
 slf4j = "2.0.7"
