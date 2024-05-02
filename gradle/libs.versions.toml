@@ -1,9 +1,9 @@
 [versions]
-assertj = "3.24.2"
+assertj = "3.25.3"
 hivemq-platform = "4.20.0"
-junit-jupiter = "5.9.2"
-mockito = "5.2.0"
-slf4j = "2.0.7"
+junit-jupiter = "5.10.2"
+mockito = "5.11.0"
+slf4j = "2.0.13"
 
 [libraries]
 assertj = { module = "org.assertj:assertj-core", version.ref = "assertj" }
