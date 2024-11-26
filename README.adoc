@@ -19,7 +19,7 @@ This project contains two example transformer implementations that show how to u
 
 * Clone this repository into a Java 11 Gradle project.
 * Run the `./gradlew jar` task from Gradle to build the customization.
-* Copy the `build/libs/hivemq-amazon-kinesis-hello-world-customization-4.34.0.jar` file to the  `HIVEMQ_HOME/extensions/hivemq-amazon-kinesis-extension/customizations` directory.
+* Copy the `build/libs/hivemq-amazon-kinesis-hello-world-customization-4.35.0.jar` file to the  `HIVEMQ_HOME/extensions/hivemq-amazon-kinesis-extension/customizations` directory.
 * Copy the `src/main/resources/amazon-kinesis-configuration.xml` file to the `HIVEMQ_HOME/extensions/hivemq-amazon-kinesis-extension` folder.
 * Adapt the configuration to your environment.
 ** (optional): Uncomment and adjust `<aws-credential-profiles>` to manage your AWS credential profiles.
