@@ -1,5 +1,5 @@
 [versions]
-assertj = "3.27.6"
+assertj = "3.27.7"
 hivemq-platform = "4.20.0"
 junit-jupiter = "5.10.2"
 mockito = "5.21.0"
