@@ -3,7 +3,7 @@ assertj = "3.27.7"
 hivemq-platform = "4.20.0"
 junit-jupiter = "5.10.2"
 mockito = "5.23.0"
-slf4j = "2.0.17"
+slf4j = "2.0.18"
 
 [libraries]
 assertj = { module = "org.assertj:assertj-core", version.ref = "assertj" }
